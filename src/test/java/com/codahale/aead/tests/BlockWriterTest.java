@@ -20,17 +20,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.codahale.aead.AEAD;
 import com.codahale.aead.BlockWriter;
 import java.nio.charset.StandardCharsets;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class BlockWriterTest {
+class BlockWriterTest {
 
   private final AEAD gcm = AEAD.gcm("ayellowsubmarine".getBytes(StandardCharsets.UTF_8));
   private final BlockWriter w = new BlockWriter(gcm, new byte[16], new byte[200]);
   private final byte[][] blocks = new byte[3][10];
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     for (int i = 0; i < blocks.length - 1; i++) {
       blocks[i] = w.encryptBlock(blocks[i]);
     }
@@ -38,7 +38,7 @@ public class BlockWriterTest {
   }
 
   @Test
-  public void knownOutputs() {
+  void knownOutputs() {
     assertThat(blocks[0])
         .isEqualTo(
             new byte[] {
