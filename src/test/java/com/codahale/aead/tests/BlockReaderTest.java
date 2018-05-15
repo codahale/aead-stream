@@ -43,8 +43,8 @@ class BlockReaderTest {
 
   @Test
   void reading() {
-    assertThat(r.decryptBlock(blocks[0])).contains(A);
-    assertThat(r.decryptBlock(blocks[1])).contains(B);
-    assertThat(r.decryptFinalBlock(blocks[2])).contains(C);
+    assertThat(r.decryptBlock(blocks[0])).isEqualTo(A);
+    assertThat(r.decryptBlock(blocks[1])).isEqualTo(B);
+    assertThat(r.decryptFinalBlock(blocks[2])).isEqualTo(C);
   }
 }

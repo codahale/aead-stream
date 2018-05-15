@@ -18,7 +18,7 @@ package com.codahale.aead;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Optional;
+import javax.annotation.Nullable;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -29,7 +29,8 @@ import javax.crypto.spec.SecretKeySpec;
 public interface AEAD {
   byte[] encrypt(byte[] nonce, byte[] plaintext, byte[] data);
 
-  Optional<byte[]> decrypt(byte[] nonce, byte[] ciphertext, byte[] data);
+  @Nullable
+  byte[] decrypt(byte[] nonce, byte[] ciphertext, byte[] data);
 
   static AEAD gcm(byte[] key) {
     return new AEAD() {
@@ -42,12 +43,13 @@ public interface AEAD {
         }
       }
 
+      @Nullable
       @Override
-      public Optional<byte[]> decrypt(byte[] nonce, byte[] ciphertext, byte[] data) {
+      public byte[] decrypt(byte[] nonce, byte[] ciphertext, byte[] data) {
         try {
-          return Optional.of(process(Cipher.DECRYPT_MODE, ciphertext, data, nonce));
+          return process(Cipher.DECRYPT_MODE, ciphertext, data, nonce);
         } catch (BadPaddingException e) {
-          return Optional.empty();
+          return null;
         }
       }
 
