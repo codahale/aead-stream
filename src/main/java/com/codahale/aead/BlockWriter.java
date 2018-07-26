@@ -25,8 +25,8 @@ public class BlockWriter {
   public BlockWriter(AEAD aead, byte[] nonce, byte[] data) {
     this.aead = aead;
     this.nonce = Arrays.copyOf(nonce, nonce.length);
-    this.data = data;
-    nonce[nonce.length - 1] = 0;
+    this.data = Arrays.copyOf(data, data.length);
+    this.nonce[nonce.length - 1] = 0;
   }
 
   public byte[] encryptBlock(byte[] block) {
