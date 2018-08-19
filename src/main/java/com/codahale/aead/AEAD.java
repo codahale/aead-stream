@@ -18,13 +18,13 @@ package com.codahale.aead;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import javax.annotation.Nullable;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import org.jetbrains.annotations.Nullable;
 
 public interface AEAD {
   byte[] encrypt(byte[] nonce, byte[] plaintext, byte[] data);
