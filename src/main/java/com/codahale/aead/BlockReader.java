@@ -16,7 +16,6 @@
 package com.codahale.aead;
 
 import java.util.Arrays;
-import org.jetbrains.annotations.Nullable;
 
 public class BlockReader {
   private final AEAD aead;
@@ -30,13 +29,11 @@ public class BlockReader {
     this.nonce[nonce.length - 1] = 0;
   }
 
-  @Nullable
   public byte[] decryptBlock(byte[] block) {
     incrementCounter(nonce);
     return aead.decrypt(nonce, block, data);
   }
 
-  @Nullable
   public byte[] decryptFinalBlock(byte[] block) {
     incrementCounter(nonce);
     nonce[nonce.length - 1] = 1;

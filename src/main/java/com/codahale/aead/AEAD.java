@@ -24,12 +24,10 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import org.jetbrains.annotations.Nullable;
 
 public interface AEAD {
   byte[] encrypt(byte[] nonce, byte[] plaintext, byte[] data);
 
-  @Nullable
   byte[] decrypt(byte[] nonce, byte[] ciphertext, byte[] data);
 
   static AEAD gcm(byte[] key) {
@@ -43,7 +41,6 @@ public interface AEAD {
         }
       }
 
-      @Nullable
       @Override
       public byte[] decrypt(byte[] nonce, byte[] ciphertext, byte[] data) {
         try {
